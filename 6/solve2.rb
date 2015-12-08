@@ -67,15 +67,15 @@ class Borde
   end
   
   def turn_on(line)
-    set_lights(line) { 1 }
+    set_lights(line) {|i| i + 1 }
   end
   
   def turn_off(line)
-    set_lights(line) { 0 }
+    set_lights(line) {|i| (i-1) > 0 ? (i-1) : 0 }
   end
   
   def toggle(line)
-    set_lights(line) { |i| (i + 1) % 2 }
+    set_lights(line) {|i| i + 2 }
   end
 end
 
