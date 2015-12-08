@@ -1,2 +1,2 @@
 # AdventOfCode
-My source codes for solvin AdventOfCode.com challenge 2015
+My source codes for solving AdventOfCode.com challenge 2015
