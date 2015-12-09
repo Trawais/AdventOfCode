@@ -1,47 +1,28 @@
 #!/usr/bin/env ruby
-lines = File.readlines(ARGV[0])
+full_file_path = File.join(File.dirname('__FILE__'), ARGV[0])
 
-def is_nice?(input_string)
-  return false if input_string.scan(/[aeiou]/).count < 3
-  return false unless input_string.match(/(\w)\1/)
-  return false if input_string.match(/ab/)
-  return false if input_string.match(/cd/)
-  return false if input_string.match(/pq/)
-  return false if input_string.match(/xy/)
+def is_nice_part1?(line)
+  return false if line.scan(/[aeiou]/).count < 3
+  return false unless line.match(/(\w)\1/)
+  return false if line.match(/(ab)|(cd)|(pq)|(xy)/)
   
   return true
 end
 
-def is_nice_2?(input_string)
-  return false unless input_string.match(/(\w\w).*\1/)
-  return false unless input_string.match(/(\w).\1/)
+def is_nice_part2?(line)
+  return false unless line.match(/(\w\w).*\1/)
+  return false unless line.match(/(\w).\1/)
   
   return true
 end
 
-nice_strings = 0
-nice_strings_2 = 0
+nice_strings_part1 = 0
+nice_strings_part2 = 0
 
-lines.each do |line|
-  if is_nice?(line)
-    nice_strings += 1
-  end
-  
-  if is_nice_2?(line)
-    nice_strings_2 += 1
-  end
+File.readlines(full_file_path).each do |line|
+  nice_strings_part1 += 1 if is_nice_part1?(line)
+  nice_strings_part2 += 1 if is_nice_part2?(line)
 end
 
-puts nice_strings
-puts is_nice?('ahoj')
-puts is_nice?('jaksemas')
-puts is_nice?('xxxx')
-puts is_nice?('xaxexixx')
-puts is_nice?('aaa')
-puts is_nice?('ugknbfddgicrmopn')
-
-puts nice_strings_2
-puts is_nice_2?('qjhvhtzxzqqjkmpb') #true
-puts is_nice_2?('xxyxx') #true
-puts is_nice_2?('uurcxstgmygtbstg') #false
-puts is_nice_2?('ieodomkazucvgmuy') #false
+puts "A solution: #{nice_strings_part1}"
+puts "B solution: #{nice_strings_part2}"
