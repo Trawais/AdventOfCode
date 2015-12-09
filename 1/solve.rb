@@ -2,25 +2,9 @@
 
 content = File.read('./input.txt')
 
-floor_counter = 0
-position = 1
-first_time = true
+move_up   = content.count "("
+move_down = content.count ")"
 
-content.split("").each do |e|
-  if e == '('
-    floor_counter += 1
-  elsif e == ')'
-    floor_counter -= 1
-  else
-    puts "invalid symbol: #{e}"
-  end
-  
-  if floor_counter == -1 && first_time
-    puts "Position of -1 floor: #{position}"
-    first_time = false
-  end
-  
-  position += 1
-end
+floor_counter = move_up - move_down
 
 puts "Final floor: #{floor_counter}"
