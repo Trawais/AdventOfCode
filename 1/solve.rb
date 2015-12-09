@@ -5,23 +5,26 @@ content = File.read(input_file)
 
 floor_counter = 0
 position = 1
-first_time = true
+found_cellar = false
 
 content.each_char do |c|
-  if c == '('
+  case c
+  when '('
     floor_counter += 1
-  elsif c == ')'
+  when ')'
     floor_counter -= 1
   else
     puts "invalid symbol: #{c}"
   end
-
-  if floor_counter == -1 && first_time
-    puts "Position of -1 floor: #{position}"
-    first_time = false
+  
+  unless found_cellar
+    if floor_counter == -1
+      found_cellar = true
+    else
+      position += 1
+    end
   end
-
-  position += 1
 end
 
 puts "Final floor: #{floor_counter}"
+puts "Cellar reached after: #{position}"
