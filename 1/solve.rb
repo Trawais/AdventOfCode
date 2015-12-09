@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
-content = File.read('./input.txt')
+input_file = File.join(File.dirname(__FILE__), 'input.txt')
+content = File.read(input_file)
 
 floor_counter = 0
 position = 1
@@ -14,12 +15,12 @@ content.split("").each do |e|
   else
     puts "invalid symbol: #{e}"
   end
-  
+
   if floor_counter == -1 && first_time
     puts "Position of -1 floor: #{position}"
     first_time = false
   end
-  
+
   position += 1
 end
 
