@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
+fail 'Script needs two parametes: <input_file> <time_limit>' if ARGV.length != 2
 lines = File.readlines(ARGV[0]).map(&:strip)
-total_seconds = 2503
+total_seconds = ARGV[1].to_i
 
 # Base class for reindeers
 class Reindeer
@@ -21,11 +22,7 @@ class Reindeer
 
   def next_sec
     @time_counter += 1
-    if @running
-      run
-    else
-      rest
-    end
+    @running ? run : rest
   end
 
   private
